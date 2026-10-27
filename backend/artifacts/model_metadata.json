@@ -1,0 +1,160 @@
+{
+  "project": "TrafficSense",
+  "app_version": "1.0.0",
+  "created_utc": "2026-10-27T13:19:32+00:00",
+  "python_version": "3.13.15",
+  "dataset_source": "local file: Metro_Interstate_Traffic_Volume.csv",
+  "dataset_reference": "UCI ML Repository - Metro Interstate Traffic Volume (id 492)",
+  "dataset_geography": "Interstate 94, Minneapolis-St. Paul, Minnesota, USA (one sensor). Not representative of every road or city.",
+  "dataset_rows_clean": 40575,
+  "features": [
+    "temp",
+    "rain_1h",
+    "snow_1h",
+    "clouds_all",
+    "hour",
+    "day_of_week",
+    "month",
+    "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "month_sin",
+    "month_cos",
+    "weather_main",
+    "holiday"
+  ],
+  "numeric_features": [
+    "temp",
+    "rain_1h",
+    "snow_1h",
+    "clouds_all",
+    "hour",
+    "day_of_week",
+    "month",
+    "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "month_sin",
+    "month_cos"
+  ],
+  "categorical_features": [
+    "weather_main",
+    "holiday"
+  ],
+  "feature_definitions": {
+    "temp": {
+      "description": "Air temperature at the sensor",
+      "unit": "kelvin"
+    },
+    "rain_1h": {
+      "description": "Rainfall accumulated in the preceding hour",
+      "unit": "millimetres"
+    },
+    "snow_1h": {
+      "description": "Snowfall accumulated in the preceding hour",
+      "unit": "millimetres"
+    },
+    "clouds_all": {
+      "description": "Cloud cover",
+      "unit": "percent (0-100)"
+    },
+    "weather_main": {
+      "description": "Short categorical weather label from the source feed",
+      "unit": "category"
+    },
+    "holiday": {
+      "description": "US national holiday name, or 'None' for an ordinary day",
+      "unit": "category"
+    },
+    "hour": {
+      "description": "Hour of day extracted from date_time",
+      "unit": "0-23"
+    },
+    "day_of_week": {
+      "description": "Day of week, Monday=0 ... Sunday=6",
+      "unit": "0-6"
+    },
+    "month": {
+      "description": "Calendar month",
+      "unit": "1-12"
+    },
+    "is_weekend": {
+      "description": "1 when the observation falls on Saturday or Sunday",
+      "unit": "0/1"
+    },
+    "hour_sin": {
+      "description": "Cyclical encoding of the hour of day (sine)",
+      "unit": "-1..1"
+    },
+    "hour_cos": {
+      "description": "Cyclical encoding of the hour of day (cosine)",
+      "unit": "-1..1"
+    },
+    "dow_sin": {
+      "description": "Cyclical encoding of the day of week (sine)",
+      "unit": "-1..1"
+    },
+    "dow_cos": {
+      "description": "Cyclical encoding of the day of week (cosine)",
+      "unit": "-1..1"
+    },
+    "month_sin": {
+      "description": "Cyclical encoding of the month (sine)",
+      "unit": "-1..1"
+    },
+    "month_cos": {
+      "description": "Cyclical encoding of the month (cosine)",
+      "unit": "-1..1"
+    },
+    "traffic_volume": {
+      "description": "Hourly traffic volume recorded by the sensor (label)",
+      "unit": "vehicles per hour"
+    }
+  },
+  "target": "traffic_volume",
+  "target_unit": "vehicles per hour",
+  "congestion_thresholds": {
+    "low_max": 1211.0,
+    "moderate_max": 4256.0,
+    "high_max": 5502.0
+  },
+  "congestion_categories": [
+    "Low",
+    "Moderate",
+    "High",
+    "Severe"
+  ],
+  "selected_model": "random_forest",
+  "candidate_models": [
+    "baseline_mean",
+    "random_forest"
+  ],
+  "random_state": 42,
+  "split": {
+    "strategy": "chronological (no shuffling)",
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "periods": {
+      "train": {
+        "start": "2012-10-02 09:00:00",
+        "end": "2017-05-10 05:00:00",
+        "rows": 28403
+      },
+      "validation": {
+        "start": "2017-05-10 06:00:00",
+        "end": "2018-01-19 15:00:00",
+        "rows": 6086
+      },
+      "test": {
+        "start": "2018-01-19 16:00:00",
+        "end": "2018-09-30 23:00:00",
+        "rows": 6086
+      }
+    },
+    "refit_on": "train + validation"
+  }
+}
